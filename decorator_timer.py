@@ -18,12 +18,12 @@ def timed(fn):
         all_args = args_ + kwargs_
         args_str = ','.join(all_args)
 
-        print(f'{fn.__name__}({args_str}) took {elapsed:.6f} to run')
+        print(f'{fn.__name__}({args_str}) took {elapsed:.6f}s to run')
 
         return result
     return inner
 
-# creating fibonacci squence using recursion
+# generating fibonacci sequence using recursion
 def recur_fibo(n: int) -> int:
     if n <= 2:
         return 1
@@ -36,7 +36,8 @@ def recur_fib_call(n):
 
 recur_fib_call(20)
 
-# creating fibonacci using loop
+
+# generating fibonacci sequence with a loop
 @timed
 def loop_fibo(n: int) -> int:
     fib_1, fib_2 = 1, 1
@@ -45,3 +46,16 @@ def loop_fibo(n: int) -> int:
     return fib_2
 
 loop_fibo(20)
+
+
+# generating fibonacci sequence using reduce
+@timed
+def reduce_fibo(n: int):
+    from functools import reduce
+    initial = (1, 0)
+    dummy = range(n)
+    fib_n = reduce(lambda prev, n: (prev[0] + prev[1], prev[0]), dummy, initial)
+
+    return fib_n[0]
+
+reduce_fibo(20)
