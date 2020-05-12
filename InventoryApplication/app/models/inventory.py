@@ -75,13 +75,13 @@ class Resource:
 		return type(self).__name__.lower()
 	
 	@property
-	def availabe(self) -> int:
+	def available(self) -> int:
 		"""
 		
 		Returns:
 			int: the number of resources available for use
 		"""
-		return self._availabe
+		return self.total - self.allocated
 	
 	def __str__(self):
 		return self.name
@@ -91,7 +91,7 @@ class Resource:
 				f"total={self.total}, allocated={self.allocated}"
 				)
 
-	def claim(self, name):
+	def claim(self, num):
 		"""Claim number of inventory items (if available)
 
 		Args:
@@ -131,7 +131,7 @@ class Resource:
 
 		"""
 		validate_integer(
-			'num', num, self.allocated,
+			'num', num, 1, self.allocated,
 			custom_max_msg='Cannot retire more than allocated.'
 		)
 		self._total -= num
@@ -148,3 +148,54 @@ class Resource:
 		"""
 		validate_integer('num', num, 1)
 		self._total += num
+
+
+class CPU(Resource):
+	"""Resource subclass used to track specific CPU inventory pools"""
+
+	def __init__(
+		self, name, manufacturer, total, allocated,
+		cores, socket, power_watts
+	):
+		super().__init__(name, manufacturer, total, allocated)
+
+		validate_integer('cores', cores, 1)
+		validate_integer('power_watts', power_watts, 1)
+
+		self._cores = cores
+		self._socket = socket
+		self._power_watts = power_watts
+
+
+	@property
+	def cores(self) -> int:
+		"""Number of cores.
+
+		Returns:
+			int
+		"""
+		return self._cores
+
+
+	@property
+	def power_watts(self) -> int:
+		"""The rated wattage of this CPU.
+
+		Returns:
+			int
+		"""		
+		return self._power_watts
+
+
+	@property
+	def socket(self) -> str:
+		"""The socket type of this CPU.
+
+		Returns:
+			str
+		"""
+		return self._socket
+	
+	
+	def __repr__(self):
+		return f"{self.category}: {self.name} ({self.socket} - x{self.cores}"
