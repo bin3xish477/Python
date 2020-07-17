@@ -14,5 +14,3 @@ def get_prog_info():
 	commands = valid_file(command_file)
 
 	return username, password, command_file
-
-get_prog_info()

@@ -22,4 +22,3 @@ def check_ip_conn(ip_list):
 			print(f"[-] {ip} is unreachable...")
 			exit(1)
 	print("[+] All IP's are reachable...")
-
