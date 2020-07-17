@@ -11,14 +11,14 @@ def check_ip_conn(ip_list):
 	os = system()
 
 	for ip in ip_list:
+		ip = ip.strip()
 		# checking operating and running ping command accordingly
-		if os == "Windows":
-			ping_reply = run(["ping", "-c", "2", ip], stdout=DEVNULL, stderr=DEVNULL)
 		if os == "Linux":
-			ping_reply = run(["ping", ip, "/n", "2"], stdout=DEVNULL, stderr=DEVNULL)
-
+			ping_reply = run(["ping", "-c", "2", ip], stdout=DEVNULL, stderr=DEVNULL)
+		if os == "Windows":
+			ping_reply = run(["ping", "/n", "2", ip], stdout=DEVNULL, stderr=DEVNULL)
 		# if exit status code is not equal 0, the ip was unreachable - exit program
-		if ping_reply != 0:
-			print(f"[-] {ip} is unreachable...")
+		if ping_reply.returncode != 0:
+			print(f"\u203c {ip} is unreachable...")
 			exit(1)
-	print("[+] All IP's are reachable...")
+	print("\u2192 All IP's are reachable...\n")

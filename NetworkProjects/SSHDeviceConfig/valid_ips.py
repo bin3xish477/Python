@@ -8,7 +8,10 @@ def valid_ips(ip_list):
 		ip_list (list): list containing IP addresses for validation.
 	"""
 	for ip in ip_list:
-		if len(re.search(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}", ip.strip()) == 0:
-			print("[-] Found an invalid IP address...")
+		found_ip = search(r"(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})", ip.strip())
+		try:
+			found_ip.group(0)
+		except AttributeError:
+			print(f"\u203c Found an invalid IP address: {ip}")
 			exit(1)
-	print("[+] All IP addresses have been successfully validated...")
+	print("\u2192 All IP addresses have been successfully validated...")
