@@ -1,1 +1,2 @@
-ipconfig
+show ip inter brief
+show ntp status

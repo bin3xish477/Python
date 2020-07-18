@@ -7,11 +7,12 @@ def get_prog_info():
 	and name of file in the current path containing commands
 	to execute on Arista switches.
 	"""
-	username = input("\u2022 Enter username: ")
-	password = getpass(prompt="\u2022 Enter password: ")
+	username = input(" \u2022 Enter username: ")
+	password = getpass(prompt=" \u2022 Enter password: ")
 
-	command_file = input("\u2022 Enter name of file containing commands (Ex. cmd.txt): ")
-	ip_file = input("\u2022 Enter name of file containing commands (Ex. ip.txt): ")
+	command_file = input(" \u2022 Enter name of file containing commands (Ex. cmd.txt): ")
+	ip_file = input(" \u2022 Enter name of file containing IP's (Ex. ip.txt): ")
+	print("_"*100)
 	commands = valid_file(command_file)
 	ip_list = valid_file(ip_file)
 

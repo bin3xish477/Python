@@ -19,6 +19,6 @@ def check_ip_conn(ip_list):
 			ping_reply = run(["ping", "/n", "2", ip], stdout=DEVNULL, stderr=DEVNULL)
 		# if exit status code is not equal 0, the ip was unreachable - exit program
 		if ping_reply.returncode != 0:
-			print(f"\u203c {ip} is unreachable...")
+			print(f" \u203c {ip} is unreachable...")
 			exit(1)
-	print("\u2192 All IP's are reachable...\n")
+	print(" \u2192 All IP's are reachable...\n")

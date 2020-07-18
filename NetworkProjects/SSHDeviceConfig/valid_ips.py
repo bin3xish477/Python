@@ -12,6 +12,6 @@ def valid_ips(ip_list):
 		try:
 			found_ip.group(0)
 		except AttributeError:
-			print(f"\u203c Found an invalid IP address: {ip}")
+			print(f" \u203c Found an invalid IP address: {ip}")
 			exit(1)
-	print("\u2192 All IP addresses have been successfully validated...")
+	print(" \u2192 All IP addresses have been successfully validated...")
