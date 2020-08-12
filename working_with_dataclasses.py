@@ -40,3 +40,6 @@ if __name__ == "__main__":
     print(f"{player1.name}'s rank is greater than {player2.name}'s: {player1.rank > player2.rank}")
     print(f"{player1.name} is younger than {player2.name}: {player1.age < player2.age}")
     print(f"{player1.name} and {player2.name} are both male: {player1.gender == player2.gender}")
+
+    player3 = Player("Machiavelli", 250, 35, "male")
+    print(f"{player3.name} is equal to {player1.name}: {player1 == player3}")
