@@ -34,7 +34,7 @@ Player (
 
 @dataclass
 class ListOfPlayers(object):
-    player_list = List[Player]
+    player_list: List[Player]
 
 if __name__ == "__main__":
     player1 = Player("BinexisHATT", 10, 20)
@@ -49,5 +49,7 @@ if __name__ == "__main__":
     player3 = Player("Machiavelli", 250, 35, "male")
     print(f"{player3.name} is equal to {player1.name}: {player1 == player3}")
 
-    players = ListOfPlayers(player1, player2, player3)
-    print(players)
+    print("-"*30)
+    players = [player1, player2, player3]
+    player_list = ListOfPlayers(players)
+    print(player_list)
