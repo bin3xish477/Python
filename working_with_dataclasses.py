@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from dataclasses import dataclass
+from typing import List
 
 """
 Dataclass arguments:
@@ -31,6 +32,10 @@ Player (
 )
 """
 
+@dataclass
+class ListOfPlayers(object):
+    player_list = List[Player]
+
 if __name__ == "__main__":
     player1 = Player("BinexisHATT", 10, 20)
     player2 = Player("Galileo", 500, 45, "male")
@@ -43,3 +48,6 @@ if __name__ == "__main__":
 
     player3 = Player("Machiavelli", 250, 35, "male")
     print(f"{player3.name} is equal to {player1.name}: {player1 == player3}")
+
+    players = ListOfPlayers(player1, player2, player3)
+    print(players)
