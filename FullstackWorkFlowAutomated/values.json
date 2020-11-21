@@ -1,0 +1,13 @@
+{
+	"description": "Office hours with Alexis",
+	"locations": "",
+	"dates": [
+		"11/23/2020",
+		"11/25/2020"
+	],
+	"time": "5",
+	"num_of_time_slots": "5",
+	"duration_of_time_slots": "20",
+	"booking_method": "Any Availble",
+	"restrict_to_cohort": "2010-FCB-CB-NY-PT"
+}
