@@ -20,6 +20,14 @@ wget "https://chromedriver.storage.googleapis.com/87.0.4280.20/chromedriver_win3
 
 unzip ~/Documents/chromedriver.zip
 
-git clone 
 
+cd ~/Documents && wget "https://raw.githubusercontent.com/binexisHATT/Python/master/FullstackWorkFlowAutomated/create_office_hours.py"
+
+wget "https://raw.githubusercontent.com/binexisHATT/Python/master/FullstackWorkFlowAutomated/values.json"
+
+```
+
+### Run
+```
+python create_office_hours.py -h
 ```
