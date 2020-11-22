@@ -36,7 +36,7 @@ pip install selenium colored
 
 ```
 
-### Modify Office Hours Settings
+### Modify values.json file for Office Hours Settings
 
 ```
 {
