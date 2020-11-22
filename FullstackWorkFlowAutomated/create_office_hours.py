@@ -176,12 +176,12 @@ def get_login(from_env=False):
 		
 		Setting environment variable in Linux:
 			For Bash users:
-				$ echo "export LEARN_EMAIL = 'test@test.com' >> ~/.bashrc
-				$ echo "export LEARN_PASSWD = 'reallystrongpasswd' >> ~/.bashrc
+				$ echo "export LEARN_EMAIL='test@test.com' >> ~/.bashrc
+				$ echo "export LEARN_PASSWD='reallystrongpasswd' >> ~/.bashrc
 
 			For Zsh users:
-				$ echo "export LEARN_EMAIL = 'test@test.com' >> ~/.zshrc
-				$ echo "export LEARN_PASSWD = 'reallystrongpasswd' >> ~/.zshrc
+				$ echo "export LEARN_EMAIL='test@test.com' >> ~/.zshrc
+				$ echo "export LEARN_PASSWD='reallystrongpasswd' >> ~/.zshrc
 		
 		[Note]: the program expects variables names to be set as LEARN_EMAIL
 		for learn dot email and LEARN_PASSWD for learn dot password
