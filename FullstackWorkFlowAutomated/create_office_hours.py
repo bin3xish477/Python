@@ -196,7 +196,7 @@ def get_login(from_env=False):
 
 def arg_parse():
 	from argparse import ArgumentParser
-	parser = ArgumentParser()
+	parser = ArgumentParser(description="Automate the creation of office hours for Fullstack Academy")
 	parser.add_argument("-e", "--email", help="LearnDot Email")
 	parser.add_argument("-p", "--passwd", help="LearnDot Password")
 	parser.add_argument("-v", "--env", action="store_true", help="use LEARN_EMAIL and LEARN_PASSWD environment variables for authentication")
