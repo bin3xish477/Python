@@ -20,6 +20,7 @@ from datetime import datetime, date
 
 
 def start_chrome(path_to_driver):
+	# Will allow us to specify options for our chromedriver
 	options = ChromeOptions()
 
 	# Turn off logging
@@ -32,7 +33,8 @@ def start_chrome(path_to_driver):
 	driver = Chrome(executable_path=path_to_driver, options=options)
 	
 	return driver
-	
+
+
 def open_learndot_tab(path_to_driver, url, email=None, passwd=None):
 	# Start the chome driver
 	print("[%sATTENTION%s] Launching browser ..." % (fg(65), attr(0)))
