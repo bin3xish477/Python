@@ -45,21 +45,21 @@ def open_learndot_tab(path_to_driver, url, email=None, passwd=None):
 	driver.get(url)
 	sleep(3)
 
-	try:
-		# Getting email input field element
-		email_input = driver.find_element_by_xpath("/html/body/div/div/welcome-dot/div/get_login/div/form/div[1]/input")
+	#try:
+	# Getting email input field element
+	email_input = driver.find_element_by_xpath("/html/body/div/div/welcome-dot/div/login/div/form/div[1]/input")
 
-		# Send email and press enter
-		email_input.send_keys(email, Keys.ENTER)
+	# Send email and press enter
+	email_input.send_keys(email, Keys.ENTER)
 
-		# Get password input field element
-		passwd_input = driver.find_element_by_xpath("/html/body/div/div/welcome-dot/div/get_login/div/form/div[1]/div[2]/input")
-		
-		# Send password and press enter
-		passwd_input.send_keys(passwd, Keys.ENTER)
-	except:
-		print("[%sFATAL%s] get_login was unsuccessful... try again and make sure your credentials are valid" % (fg(196), attr(0)))
-		exit(1)
+	# Get password input field element
+	passwd_input = driver.find_element_by_xpath("/html/body/div/div/welcome-dot/div/login/div/form/div[1]/div[2]/input")
+	
+	# Send password and press enter
+	passwd_input.send_keys(passwd, Keys.ENTER)
+	#except:
+	#	print("[%sFATAL%s] login was unsuccessful... try again and make sure your credentials are valid" % (fg(196), attr(0)))
+	#	exit(1)
 
 	return driver
 	
@@ -84,6 +84,7 @@ def create_office_hours(driver, url, values: dict):
 			date_setter = driver.find_element_by_xpath("/html/body/div[2]/ui-view/ui-view/div/div/div/div[2]/div[2]/div[1]/div/div[1]/div[1]/div/input")
 
 			# Set date value
+			date_setter.send_keys(Keys.CONTROL + 'a')
 			date_setter.send_keys(values["dates"][i], Keys.ENTER)
 
 			# Get Date selection field
@@ -98,7 +99,7 @@ def create_office_hours(driver, url, values: dict):
 
 			# Set Minute
 			minute_setter.send_keys(Keys.CONTROL + 'a')
-			minute_setter.send_keys(values["time"]["minute"], Keys.ENTER)
+			minute_setter.send_keys(values["time"]["minute"].zfill(2), Keys.ENTER)
 
 			# Get am/pm field 
 			am_pm_setter = driver.find_element_by_xpath("/html/body/div[2]/ui-view/ui-view/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/button")
@@ -198,7 +199,7 @@ def arg_parse():
 	parser = ArgumentParser()
 	parser.add_argument("-e", "--email", help="LearnDot Email")
 	parser.add_argument("-p", "--passwd", help="LearnDot Password")
-	parser.add_argument("-v", "--env", help="use LEARN_EMAIL and LEARN_PASSWD environment variables for authentication")
+	parser.add_argument("-v", "--env", action="store_true", help="use LEARN_EMAIL and LEARN_PASSWD environment variables for authentication")
 	return parser.parse_args()
 
 def main():
@@ -221,7 +222,7 @@ def main():
 		path_to_driver = user_home_dir + "/Documents/chromedriver"
 
 	if not args.email or not args.passwd:
-		email, passwd = get_login()
+		email, passwd = get_login(from_env=args.env)
 		driver = open_learndot_tab(path_to_driver, url, email=email, passwd=passwd)
 	else:
 		driver = open_learndot_tab(path_to_driver, url, email=args.email, passwd=args.passwd)

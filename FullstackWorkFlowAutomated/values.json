@@ -3,15 +3,15 @@
 	"location": "Slack me before office hours",
 	"dates": [
 		"11/30/2020",
-		"12/2/2020",
-		"12/2/2020"
+		"12/02/2020",
+		"12/04/2020"
 	],
 	"time": {
-		"hour": 7,
-		"minute": 30,
-		"am_pm": "AM"
+		"hour": "6",
+		"minute": "00",
+		"am_pm": "PM"
 	},
-	"num_of_slots": 5,
+	"num_of_slots": 9,
 	"slot_duration": 20,
 	"booking_method": "any available",
 	"employees_only": false,
