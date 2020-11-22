@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 """
 Chrome Web Driver Zip File
 https://chromedriver.storage.googleapis.com/87.0.4280.20/chromedriver_win32.zip
@@ -12,7 +13,7 @@ from getpass import getpass
 from pathlib import Path
 from platform import system
 from time import sleep
-from os import devnull
+from os import environ
 from sys import exit
 from json import load
 from colored import fg, attr
@@ -40,24 +41,24 @@ def open_learndot_tab(path_to_driver, url, email=None, passwd=None):
 	print("[%sATTENTION%s] Launching browser ..." % (fg(65), attr(0)))
 	driver = start_chrome(path_to_driver)
 
-	# Open tab to learndot login page
+	# Open tab to learndot get_login page
 	driver.get(url)
 	sleep(3)
 
 	try:
 		# Getting email input field element
-		email_input = driver.find_element_by_xpath("/html/body/div/div/welcome-dot/div/login/div/form/div[1]/input")
+		email_input = driver.find_element_by_xpath("/html/body/div/div/welcome-dot/div/get_login/div/form/div[1]/input")
 
 		# Send email and press enter
 		email_input.send_keys(email, Keys.ENTER)
 
 		# Get password input field element
-		passwd_input = driver.find_element_by_xpath("/html/body/div/div/welcome-dot/div/login/div/form/div[1]/div[2]/input")
+		passwd_input = driver.find_element_by_xpath("/html/body/div/div/welcome-dot/div/get_login/div/form/div[1]/div[2]/input")
 		
 		# Send password and press enter
 		passwd_input.send_keys(passwd, Keys.ENTER)
 	except:
-		print("[%sFATAL%s] Login was unsuccessful... try again and make sure your credentials are valid" % (fg(196), attr(0)))
+		print("[%sFATAL%s] get_login was unsuccessful... try again and make sure your credentials are valid" % (fg(196), attr(0)))
 		exit(1)
 
 	return driver
@@ -101,7 +102,7 @@ def create_office_hours(driver, url, values: dict):
 
 			# Get am/pm field 
 			am_pm_setter = driver.find_element_by_xpath("/html/body/div[2]/ui-view/ui-view/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/button")
-			if am_pm_setter.text == "AM" and values["time"]["am_or_pm"].upper() == "AM":
+			if am_pm_setter.text == "AM" and values["time"]["am_pm"].upper() == "AM":
 				pass	
 			else:
 				am_pm_setter.send_keys(Keys.ENTER, Keys.TAB)
@@ -163,10 +164,33 @@ def create_office_hours(driver, url, values: dict):
 			sleep(3)
 
 
-def login():
+def get_login(from_env=False):
+	# If email and password are set as environment variables, read
+	# use those creds as valid creds for learndot
+	if from_env:
+		"""
+		Setting environment variable with PowerShell:
+			PS > $Env:LEARN_EMAIL = 'test@test.com' >> C:\\Users\rodri\\Documents\\WindowsPowerShell\\profile.ps1
+			PS > $Env:LEARN_PASSWD = 'reallystrongpassword' >> C:\\Users\rodri\\Documents\\WindowsPowerShell\\profile.ps1
+		
+		Setting environment variable in Linux:
+			For Bash users:
+				$ echo "export LEARN_EMAIL = 'test@test.com' >> ~/.bashrc
+				$ echo "export LEARN_PASSWD = 'reallystrongpasswd' >> ~/.bashrc
+
+			For Zsh users:
+				$ echo "export LEARN_EMAIL = 'test@test.com' >> ~/.zshrc
+				$ echo "export LEARN_PASSWD = 'reallystrongpasswd' >> ~/.zshrc
+		
+		[Note]: the program expects variables names to be set as LEARN_EMAIL
+		for learn dot email and LEARN_PASSWD for learn dot password
+		"""
+		return environ["LEARN_EMAIL"], environ["LEARN_PASSWD"]
+
+	# Prompt for creds
 	email = input("Enter LearnDot email: ")
 	passwd = getpass("Enter LearnDot Password: ")
-	return (email, passwd)
+	return email, passwd
 
 
 def arg_parse():
@@ -174,8 +198,8 @@ def arg_parse():
 	parser = ArgumentParser()
 	parser.add_argument("-e", "--email", help="LearnDot Email")
 	parser.add_argument("-p", "--passwd", help="LearnDot Password")
+	parser.add_argument("-v", "--env", help="use LEARN_EMAIL and LEARN_PASSWD environment variables for authentication")
 	return parser.parse_args()
-
 
 def main():
 	# Parse programs arguments
@@ -194,10 +218,10 @@ def main():
 	if system_ == "Windows":
 		path_to_driver = user_home_dir + "\\Documents\\chromedriver.exe"
 	else:
-		path_to_driver = user_home_dir + "/Documents/chromedriver.exe"
+		path_to_driver = user_home_dir + "/Documents/chromedriver"
 
 	if not args.email or not args.passwd:
-		email, passwd = login()
+		email, passwd = get_login()
 		driver = open_learndot_tab(path_to_driver, url, email=email, passwd=passwd)
 	else:
 		driver = open_learndot_tab(path_to_driver, url, email=args.email, passwd=args.passwd)

@@ -1,18 +1,19 @@
 {
 	"description": "Office hours with Alexis",
-	"location": "Fullstack Campus",
+	"location": "Slack me before office hours",
 	"dates": [
-		"12/11/2020",
-		"12/13/2020"
+		"11/30/2020",
+		"12/2/2020",
+		"12/2/2020"
 	],
 	"time": {
 		"hour": 7,
 		"minute": 30,
-		"am_or_pm": "AM"
+		"am_pm": "AM"
 	},
 	"num_of_slots": 5,
 	"slot_duration": 20,
-	"booking_method": "sequential booking",
+	"booking_method": "any available",
 	"employees_only": false,
 	"restrict_to_cohorts": [
 		"2010-FCB-NY-CYB-PT"
