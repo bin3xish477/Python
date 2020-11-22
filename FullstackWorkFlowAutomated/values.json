@@ -1,13 +1,20 @@
 {
 	"description": "Office hours with Alexis",
-	"locations": "",
+	"location": "Fullstack Campus",
 	"dates": [
-		"11/23/2020",
-		"11/25/2020"
+		"12/11/2020",
+		"12/13/2020"
 	],
-	"time": "5",
-	"num_of_time_slots": "5",
-	"duration_of_time_slots": "20",
-	"booking_method": "Any Availble",
-	"restrict_to_cohort": "2010-FCB-CB-NY-PT"
+	"time": {
+		"hour": 7,
+		"minute": 30,
+		"am_or_pm": "AM"
+	},
+	"num_of_slots": 5,
+	"slot_duration": 20,
+	"booking_method": "sequential booking",
+	"employees_only": false,
+	"restrict_to_cohorts": [
+		"2010-FCB-NY-CYB-PT"
+	]
 }
