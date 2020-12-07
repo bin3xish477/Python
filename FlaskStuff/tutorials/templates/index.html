@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title%}Home page{% endblock %}
+<!doctype html>
+<html>
+<head>
+    <title>Home Page</title>
+</head>
+
+<body>
+    <h1>Welcome to the Home page!</h1>
+    <!-- content will be handled by the rendered_template function! -->
+    <!-- Writing native Python in html!! -->
+    {% for name in content %}
+        <p>Hello {{name}}</p>
+    {% endfor %}
+</body>
+</html>
