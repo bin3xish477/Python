@@ -8,6 +8,10 @@ class ShoppingCart():
         self._max_items: int = max_items
 
     @property
+    def items(self) -> List[str]:
+        return self._items
+
+    @property
     def max_items(self) -> int:
         return self._max_items
 
@@ -23,9 +27,6 @@ class ShoppingCart():
     def clear(self):
         self._items.clear()
 
-    def get_items(self) -> List[str]:
-        return self._items
-
-    def get_total_price(self, price_map) -> None:
-        pass
+    def get_total_price(self, price_map) -> float:
+        return sum([price_map.get(item) for item in self.items])
 
